@@ -1,4 +1,4 @@
-rack-undefined replaces any parameters with the string "undefined" or "null" by an honest Ruby nil.
+rack-undefined replaces any parameters that have the value "undefined" or "null" by an honest Ruby nil.
 
 ## Installation
 
@@ -23,6 +23,13 @@ This library fixes that problem at the rack level, so your rails app doesn't nee
 1. Transparently fixes `validates_presence_of` without needing to monkey patch.
 2. Saves space in your database, the null byte is waay smaller than the word "null".
 3. Simplifies `if foo.nil? || foo == "undefined"` into just `if foo.nil?`.
+
+## Example
+
+```
+curl http://localhost:9292/?foo=bar&baz=undefined
+params == {foo: "bar", baz: nil}
+```
 
 ## Testimonials
 
